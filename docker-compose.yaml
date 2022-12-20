@@ -1,0 +1,29 @@
+version: '3.0'
+services:
+  subversion:
+    image: subversion:latest
+    container_name: subversion
+    restart: always
+    ports:
+      - "8080:8080"
+      - "3690:3690"
+    volumes:
+      - apache2_conf:/usr/local/apache2/conf
+      - subversion_access:/etc/subversion
+      - svn_home:/home/svn
+volumes:
+  apache2_conf:
+    driver_opts:
+      type: none
+      device: /vol/subversion/apache2_conf
+      o: bind
+  subversion_access:
+    driver_opts:
+      type: none
+      device: /vol/subversion/subversion_access
+      o: bind
+  svn_home:
+    driver_opts:
+      type: none
+      device: /vol/subversion/svn_home
+      o: bind
